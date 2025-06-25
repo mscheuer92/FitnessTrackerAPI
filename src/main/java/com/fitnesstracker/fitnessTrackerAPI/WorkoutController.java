@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fitnesstracker.fitnessTrackerAPI.model.Workout;
 import com.fitnesstracker.fitnessTrackerAPI.repo.WorkoutRepo;
+
 
 
 
@@ -45,6 +47,32 @@ public class WorkoutController {
             return ResponseEntity.notFound().build();
         }
     }
+
+@PutMapping("workout/{id}")
+public ResponseEntity<Workout> updateWorkout(@PathVariable String Id, @RequestBody Workout workoutDetails) {
+    Optional<Workout> optionalWorkout = repo.findById(Id);
+
+    if (optionalWorkout.isPresent()) {
+        Workout existingWorkout = optionalWorkout.get();
+
+        if (workoutDetails.getWorkoutType() != null) {
+            existingWorkout.setWorkoutType(workoutDetails.getWorkoutType());
+        }
+
+        if (workoutDetails.getDuration() > 0) {
+            existingWorkout.setDuration(workoutDetails.getDuration());
+        }
+
+        if (workoutDetails.getDate() != null) {
+            existingWorkout.setDate(workoutDetails.getDate());
+        }
+
+        Workout updatedWorkout = repo.save(existingWorkout);
+        return new ResponseEntity<>(updatedWorkout, HttpStatus.OK);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
 
     @DeleteMapping("/workout/{Id}")
     public ResponseEntity <Workout> deleteWorkout(@PathVariable String Id){
