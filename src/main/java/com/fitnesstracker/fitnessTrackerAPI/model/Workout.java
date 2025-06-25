@@ -1,5 +1,6 @@
 package com.fitnesstracker.fitnessTrackerAPI.model;
 import java.util.Date;
+import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,21 +13,24 @@ import jakarta.validation.constraints.Positive;
 @Entity
 @Table(name="workout")
 public class Workout {
-    @Id private long id;
+    @Id private String id;
 
     @NotBlank(message= "Workout Type Required")
     private String workoutType;
     @NotNull(message = "Time cannot be null")
     @Positive(message= "Time should be a positive number")
     private int duration;
-    
     private Date date;
 
-    public void setId(long id) {
+    public void generateId() {
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
-    public void setWorkoutName(String workoutName) {
-        this.workoutType = workoutName;
+    public void setWorkoutType(String workoutType) {
+        this.workoutType = workoutType;
     }
     public void setDuration(int duration) {
         this.duration = duration;
@@ -34,10 +38,10 @@ public class Workout {
     public void setDate(Date date) {
         this.date = date;
     }
-    public long getId() {
+    public String getId() {
         return id;
     }
-    public String getWorkoutName() {
+    public String getWorkoutType() {
         return workoutType;
     }
     public int getDuration() {
