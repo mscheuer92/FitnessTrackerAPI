@@ -17,8 +17,6 @@ import com.fitnesstracker.fitnessTrackerAPI.model.Workout;
 import com.fitnesstracker.fitnessTrackerAPI.repo.WorkoutRepo;
 
 
-
-
 @RestController
 public class WorkoutController {
     @Autowired 
@@ -36,9 +34,9 @@ public class WorkoutController {
         return repo.findAll();
     }
 
-    @GetMapping("/workout/{Id}")
-    public ResponseEntity <Workout> getWorkout(@PathVariable String Id){
-        Optional <Workout> workout = repo.findById(Id); // findById returns an Optional
+    @GetMapping("/workout/{workoutID}")
+    public ResponseEntity <Workout> getWorkout(@PathVariable String workoutID){
+        Optional <Workout> workout = repo.findById(workoutID); // findById returns an Optional
 
         if (workout.isPresent()){
             return ResponseEntity.ok(workout.get());
@@ -48,19 +46,15 @@ public class WorkoutController {
         }
     }
 
-@PutMapping("workout/{id}")
-public ResponseEntity<Workout> updateWorkout(@PathVariable String Id, @RequestBody Workout workoutDetails) {
-    Optional<Workout> optionalWorkout = repo.findById(Id);
+@PutMapping("workout/{workoutID}")
+public ResponseEntity<Workout> updateWorkout(@PathVariable String workoutID, @RequestBody Workout workoutDetails) {
+    Optional<Workout> optionalWorkout = repo.findById(workoutID);
 
     if (optionalWorkout.isPresent()) {
         Workout existingWorkout = optionalWorkout.get();
 
         if (workoutDetails.getWorkoutType() != null) {
             existingWorkout.setWorkoutType(workoutDetails.getWorkoutType());
-        }
-
-        if (workoutDetails.getDuration() > 0) {
-            existingWorkout.setDuration(workoutDetails.getDuration());
         }
 
         if (workoutDetails.getDate() != null) {
@@ -74,10 +68,10 @@ public ResponseEntity<Workout> updateWorkout(@PathVariable String Id, @RequestBo
     }
 }
 
-    @DeleteMapping("/workout/{Id}")
-    public ResponseEntity <Workout> deleteWorkout(@PathVariable String Id){
-        if (repo.existsById(Id)){
-            repo.deleteById(Id);
+    @DeleteMapping("/workout/{workoutID}")
+    public ResponseEntity <Workout> deleteWorkout(@PathVariable String workoutID){
+        if (repo.existsById(workoutID)){
+            repo.deleteById(workoutID);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } 
         else {
