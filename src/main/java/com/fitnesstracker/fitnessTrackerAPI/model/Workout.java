@@ -2,6 +2,7 @@ package com.fitnesstracker.fitnessTrackerAPI.model;
 import java.util.Date;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -13,6 +14,7 @@ import jakarta.validation.constraints.Positive;
 @Entity
 @Table(name="workout")
 public class Workout {
+    @Column(name="workout_id") 
     @Id private String workoutID;
     @NotBlank(message= "Workout Type Required")
     private String workoutType;

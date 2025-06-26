@@ -1,9 +1,11 @@
 package com.fitnesstracker.fitnessTrackerAPI;
-import java.util.Optional;  
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +19,12 @@ import com.fitnesstracker.fitnessTrackerAPI.repo.WorkoutRepo;
 
 @RestController
 public class ExerciseController {
-    // POST by Workout ID - add an exercise to a Workout /workout/exercise
-    // GET all exercises List<Exercise> /workout/exercise
-    // GET individual exercise /workout/{id}/exercise/{id}
+    // POST by Workout ID - add an exercise to a Workout /workout/{workoutID}/exercise -- DONE
+    // GET all exercises List<Exercise> /exercise
+    // GET individual exercise /exercise/{id}
     // PUT exercise /workout/{id}/exercise/{id}
     // DELETE exervise /workout/{id}/exercise/{id}
+
     @Autowired
     ExerciseRepo exerciseRepo;
    
@@ -41,6 +44,22 @@ public class ExerciseController {
         else{
             return ResponseEntity.notFound().build();
         }
+    }    
 
+    @GetMapping("/exercise")
+    public List<Exercise> getAllExercises(){
+        return exerciseRepo.findAll();
+    }
 
-    }}
+    @GetMapping("/exercise/{exerciseID}")
+    public ResponseEntity<Exercise> getExercise(@PathVariable String exerciseID){
+        Optional <Exercise> exercise = exerciseRepo.findById(exerciseID);
+        if (exercise.isPresent()){
+            return(ResponseEntity.ok(exercise.get()));
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+    }
