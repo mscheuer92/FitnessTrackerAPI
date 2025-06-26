@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +16,7 @@ import com.fitnesstracker.fitnessTrackerAPI.model.Exercise;
 import com.fitnesstracker.fitnessTrackerAPI.model.Workout;
 import com.fitnesstracker.fitnessTrackerAPI.repo.ExerciseRepo;
 import com.fitnesstracker.fitnessTrackerAPI.repo.WorkoutRepo;
+
 
 
 @RestController
@@ -62,4 +64,33 @@ public class ExerciseController {
         }
 
     }
+
+    @PutMapping("/exercise/{exerciseID}")
+    public ResponseEntity<Exercise> updateExercise(@PathVariable String exerciseID, @RequestBody Exercise exerciseDetails ) {
+        Optional<Exercise> exercise = exerciseRepo.findById(exerciseID);
+        if (exercise.isPresent()){
+            Exercise existingExercise = exercise.get();
+            if (exerciseDetails.getExerciseName()!= null){
+                existingExercise.setExerciseName(exerciseDetails.getExerciseName());    
+            }
+            if (exerciseDetails.getExerciseDurationMin() != 0){
+                existingExercise.setexerciseDurationMin(exerciseDetails.getExerciseDurationMin());
+            }
+        
+            if (exerciseDetails.getSets() != 0){
+                existingExercise.setSets(exerciseDetails.getSets());
+            }
+        
+            if (exerciseDetails.getReps() != 0){
+                existingExercise.setReps(exerciseDetails.getReps());
+            }
+            Exercise updatedExercise = exerciseRepo.save(existingExercise);
+            return new ResponseEntity<>(updatedExercise, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
     }
