@@ -21,6 +21,13 @@ import com.fitnesstracker.fitnessTrackerAPI.repo.WorkoutRepo;
 public class WorkoutController {
     @Autowired 
     WorkoutRepo repo;
+    // POST addWorkout /workout -- DONE
+    // GET List<workout> /workouts -- DONE
+    // GET workout/{workoutID} -- DONE
+    // GET List<Workout> /workout/{workoutID}/exercise - List workout with its exercises
+    // PUT workout/{workoutID} -- DONE 
+    // DElETE workout/{workoutID} -- DONE
+
 
     @PostMapping("/workout")
     public ResponseEntity <Workout> addWorkout(@RequestBody Workout workout) {

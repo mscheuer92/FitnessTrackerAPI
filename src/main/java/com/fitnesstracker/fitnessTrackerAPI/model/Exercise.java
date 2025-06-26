@@ -1,6 +1,8 @@
 package com.fitnesstracker.fitnessTrackerAPI.model;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,12 +22,15 @@ private String exerciseID;
 @NotBlank(message= "Exerise name cannot be blank")
  private String exerciseName;
 
- @NotBlank(message= "Exerise duration cannot be blank")
+@NotBlank(message= "Exerise duration cannot be blank")
 @Positive(message="Exercise duration must be a positive number")
 private int exerciseDuration;
 
 @JoinColumn(name = "workout_id", nullable = false)
+
 @ManyToOne
+@JsonBackReference
+
 private Workout workout;
 
 public void generateId() {

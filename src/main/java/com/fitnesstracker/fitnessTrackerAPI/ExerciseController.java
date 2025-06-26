@@ -20,8 +20,8 @@ import com.fitnesstracker.fitnessTrackerAPI.repo.WorkoutRepo;
 @RestController
 public class ExerciseController {
     // POST by Workout ID - add an exercise to a Workout /workout/{workoutID}/exercise -- DONE
-    // GET all exercises List<Exercise> /exercise
-    // GET individual exercise /exercise/{id}
+    // GET all exercises List<Exercise> /exercise -- Done
+    // GET individual exercise /exercise/{id} -- Done
     // PUT exercise /workout/{id}/exercise/{id}
     // DELETE exervise /workout/{id}/exercise/{id}
 
