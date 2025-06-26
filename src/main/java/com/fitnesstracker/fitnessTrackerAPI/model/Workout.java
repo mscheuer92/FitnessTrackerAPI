@@ -36,8 +36,6 @@ public class Workout {
     @JsonManagedReference
     private List<Exercise> exercises = new ArrayList<>();
 
-
-
     public void generateId() {
         this.workoutID = UUID.randomUUID().toString();
     }

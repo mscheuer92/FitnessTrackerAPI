@@ -22,9 +22,16 @@ private String exerciseID;
 @NotBlank(message= "Exerise name cannot be blank")
  private String exerciseName;
 
-@NotBlank(message= "Exerise duration cannot be blank")
+@NotBlank(message= "Exercise duration cannot be blank")
 @Positive(message="Exercise duration must be a positive number")
-private int exerciseDuration;
+private int exerciseDurationMin;
+
+@Positive(message="The number of sets must be positive")
+private int sets;
+
+@Positive(message="The number of reps must be positive")
+private int reps;
+
 
 @JoinColumn(name = "workout_id", nullable = false)
 
@@ -32,6 +39,22 @@ private int exerciseDuration;
 @JsonBackReference
 
 private Workout workout;
+
+public int getSets() {
+    return sets;
+}
+
+public void setSets(int sets) {
+    this.sets = sets;
+}
+
+public int getReps() {
+    return reps;
+}
+
+public void setReps(int reps) {
+    this.reps = reps;
+}
 
 public void generateId() {
     this.exerciseID = UUID.randomUUID().toString();
@@ -53,12 +76,12 @@ public void setWorkout(Workout workout) {
     }
 
 
-public int getExerciseDuration() {
-    return exerciseDuration;
+public int getExerciseDurationMin() {
+    return exerciseDurationMin;
 }
 
-public void setExerciseDuration(int exerciseDuration) {
-    this.exerciseDuration = exerciseDuration;
+public void setexerciseDurationMin(int exerciseDurationMin) {
+    this.exerciseDurationMin = exerciseDurationMin;
 }
 
  public String getExerciseName() {
