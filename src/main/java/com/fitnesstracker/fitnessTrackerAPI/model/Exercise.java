@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Positive;
 public class Exercise {
 @Column(name="exercise_id")    
 @Id 
-private String exerciseID;
+private final String exerciseID;
 
 @NotBlank(message= "Exerise name cannot be blank")
  private String exerciseName;
@@ -32,6 +32,10 @@ private int sets;
 @Positive(message="The number of reps must be positive")
 private int reps;
 
+//TO DO
+// distanceRan
+// weightLifted
+
 
 @JoinColumn(name = "workout_id", nullable = false)
 
@@ -39,6 +43,10 @@ private int reps;
 @JsonBackReference
 
 private Workout workout;
+
+public Exercise() {
+    this.exerciseID = UUID.randomUUID().toString();
+}
 
 public int getSets() {
     return sets;
@@ -56,15 +64,8 @@ public void setReps(int reps) {
     this.reps = reps;
 }
 
-public void generateId() {
-    this.exerciseID = UUID.randomUUID().toString();
-}
-
  public String getExerciseID() {
     return exerciseID;
- }
- public void setExerciseID(String exerciseID) {
-    this.exerciseID = exerciseID;
  }
 
 public Workout getWorkout() {
@@ -74,7 +75,6 @@ public Workout getWorkout() {
 public void setWorkout(Workout workout) {
     this.workout = workout;
     }
-
 
 public int getExerciseDurationMin() {
     return exerciseDurationMin;

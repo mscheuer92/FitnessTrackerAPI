@@ -22,7 +22,7 @@ import com.fitnesstracker.fitnessTrackerAPI.repo.WorkoutRepo;
 
 @RestController
 public class ExerciseController {
-    // POST by Workout ID - add an exercise to a Workout /workout/{workoutID}/exercise -- DONE
+    // POST by Workout ID - add an exercise to a Workout /workout/{workoutID}/exercise -- Done
     // GET all exercises List<Exercise> /exercise -- Done
     // GET individual exercise /exercise/{id} -- Done
     // PUT exercise /workout/{id}/exercise/{id} -- Done
@@ -37,7 +37,6 @@ public class ExerciseController {
     @PostMapping("/workout/{workoutID}/exercise")
     public ResponseEntity<Exercise> addExercise(@PathVariable String workoutID, @RequestBody Exercise exercise) {
         Optional<Workout> workoutOpt = workoutRepo.findById(workoutID);
-        exercise.generateId();
         if (workoutOpt.isPresent()){
             Workout workout = workoutOpt.get();
             exercise.setWorkout(workout);

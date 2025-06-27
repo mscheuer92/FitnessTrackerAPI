@@ -36,13 +36,10 @@ public class Workout {
     @JsonManagedReference
     private List<Exercise> exercises = new ArrayList<>();
 
-    public void generateId() {
+    public Workout() {
         this.workoutID = UUID.randomUUID().toString();
     }
-
-    public void setWorkoutID(String workoutID) {
-        this.workoutID = workoutID;
-    }
+    
     public void setWorkoutType(String workoutType) {
         this.workoutType = workoutType;
     }

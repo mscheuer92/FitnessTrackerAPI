@@ -28,10 +28,11 @@ public class WorkoutController {
     // PUT workout/{workoutID} -- DONE 
     // DElETE workout/{workoutID} -- DONE
 
+    
+
 
     @PostMapping("/workout")
     public ResponseEntity <Workout> addWorkout(@RequestBody Workout workout) {
-        workout.generateId();
         Workout savedWorkout = repo.save(workout);
         return new ResponseEntity<>(savedWorkout, HttpStatus.CREATED);        
     }
