@@ -18,7 +18,7 @@ public class FitnessUser {
 private String username;
 @Column(name="user_id")
 @Id
-private String userID;
+private final String userID;
 
 public FitnessUser() {
     this.userID = UUID.randomUUID().toString();
