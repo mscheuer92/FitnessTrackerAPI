@@ -77,17 +77,14 @@ public ResponseEntity<Workout> updateWorkout(@PathVariable String workoutID, @Re
 
     @DeleteMapping("/workout/{workoutID}")
     public ResponseEntity <Workout> deleteWorkout(@PathVariable String workoutID){
-        if (repo.existsById(workoutID)){
+        Optional <Workout> workout = repo.findById(workoutID);
+        if (workout.isPresent()){
             repo.deleteById(workoutID);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
-        } 
-        else {
-            return ResponseEntity.notFound().build();
         }
-
-
-
-
+        else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
-}
+    }
