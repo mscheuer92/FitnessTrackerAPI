@@ -21,9 +21,8 @@ import jakarta.validation.constraints.Positive;
 @Table(name="workout")
 public class Workout {
     @Column(name="workout_id") 
-    
     @Id 
-    private String workoutID;
+    private final String workoutID;
     
     @NotBlank(message= "Workout Type Required")
     private String workoutType;

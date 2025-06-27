@@ -28,7 +28,11 @@ public class WorkoutController {
     // PUT workout/{workoutID} -- DONE 
     // DElETE workout/{workoutID} -- DONE
 
-    
+ // TO DO once USER is complete:
+ // ----------------------------
+ // The workouts will be attached to the user
+ // Workouts will need to incorperate userID in the payload of the requests for POST and PUT (or in the URI, unsure which is better.)
+ // They will need to add the userID in the GET request URI
 
 
     @PostMapping("/workout")

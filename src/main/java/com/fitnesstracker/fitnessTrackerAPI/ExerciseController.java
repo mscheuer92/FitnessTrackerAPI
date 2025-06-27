@@ -74,7 +74,7 @@ public class ExerciseController {
                 existingExercise.setExerciseName(exerciseDetails.getExerciseName());    
             }
             if (exerciseDetails.getExerciseDurationMin() != 0){
-                existingExercise.setexerciseDurationMin(exerciseDetails.getExerciseDurationMin());
+                existingExercise.setExerciseDurationMin(exerciseDetails.getExerciseDurationMin());
             }
         
             if (exerciseDetails.getSets() != 0){

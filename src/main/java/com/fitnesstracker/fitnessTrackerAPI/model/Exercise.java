@@ -32,9 +32,11 @@ private int sets;
 @Positive(message="The number of reps must be positive")
 private int reps;
 
-//TO DO
-// distanceRan
-// weightLifted
+@Positive(message="Distance ran must be a positive number")
+private double distanceRanMiles;
+
+@Positive(message="Weight lifted must be a positive number")
+private double weightLiftedPounds;
 
 
 @JoinColumn(name = "workout_id", nullable = false)
@@ -46,6 +48,22 @@ private Workout workout;
 
 public Exercise() {
     this.exerciseID = UUID.randomUUID().toString();
+}
+
+public double getDistanceRanMiles() {
+    return distanceRanMiles;
+}
+
+public void setDistanceRanMiles(double distanceRanMiles) {
+    this.distanceRanMiles = distanceRanMiles;
+}
+
+public double getWeightLiftedPounds() {
+    return weightLiftedPounds;
+}
+
+public void setWeightLiftedPounds(double weightLiftedPounds) {
+    this.weightLiftedPounds = weightLiftedPounds;
 }
 
 public int getSets() {
@@ -76,14 +94,13 @@ public void setWorkout(Workout workout) {
     this.workout = workout;
     }
 
-public int getExerciseDurationMin() {
-    return exerciseDurationMin;
-}
-
-public void setexerciseDurationMin(int exerciseDurationMin) {
+public void setExerciseDurationMin(int exerciseDurationMin) {
     this.exerciseDurationMin = exerciseDurationMin;
 }
 
+public int getExerciseDurationMin() {
+    return exerciseDurationMin;
+}
  public String getExerciseName() {
     return exerciseName;
  }
